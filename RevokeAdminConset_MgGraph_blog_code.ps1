@@ -14,11 +14,13 @@ Connect-MgGraph
 
 #need to get the service principal object id for Microsoft Graph
 # graph request being made: GET https://graph.microsoft.com/v1.0/servicePrincipals?$filter=appId eq '00000003-0000-0000-c000-000000000000'
+# Documentation: https://docs.microsoft.com/en-us/graph/api/serviceprincipal-get?view=graph-rest-1.0&tabs=http
 $resourceSP = Get-MgServicePrincipal -Filter "appId eq '$resourceAppIdThatOwnsScope'"
 $resourceId = $resourceSP.Id
 "--> Resource Service Principal ID for your tenant:                         " + $resourceId
 
 # graph request being made: GET https://graph.microsoft.com/v1.0/oauth2PermissionGrants?$filter=clientId eq 'de8601aa-154e-44c0-a602-d74d11143ce0' and ConsentType eq 'AllPrincipals' and resourceId eq 'e2ef5b0a-7ba9-4c34-9d9a-581dd1e0292b'
+# Documentation: https://docs.microsoft.com/en-us/graph/api/oauth2permissiongrant-list?view=graph-rest-1.0&tabs=http
 $spOAuth2PermissionsGrants = Get-MgOauth2PermissionGrant -Filter "clientId eq '$SPtoRemoveConsentOn' and ConsentType eq 'AllPrincipals' and resourceId eq '$resourceId'"
 Write-Host("OAuth2 Permission Grant Object:")
 ($spOAuth2PermissionsGrants)|FL
@@ -35,6 +37,8 @@ $scope = $scope.Replace($scopeToRemove,"")
 "--> New scope value:                                                       " + $scope
 
 #update the service principal with the new list of scopes
+# Documentation: https://docs.microsoft.com/en-us/graph/api/oauth2permissiongrant-update?view=graph-rest-1.0&tabs=http
+
 # Update-MgOauth2PermissionGrant -OAuth2PermissionGrantId $consentId -Scope $scope.Trim(" ")
 
 # graph request that was made in the end:
