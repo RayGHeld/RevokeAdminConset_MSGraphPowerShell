@@ -1,6 +1,8 @@
 # RevokeAdminConset_MSGraphPowerShell
 Revoke Admin Consent for a permission on a Service Principal with the MS Graph PowerShell SDK
 
+Read the blog post: https://blogs.aaddevsup.xyz/2022/06/revoke-admin-consent-for-a-delegated-permission-on-a-service-principal-with-the-ms-graph-powershell-sdk/
+
 <!-- wp:paragraph -->
 <p>Scenario: You use the Microsoft Graph Explorer tool to test a query.  It requires you to consent to a permission so you use your admin account to do this.  However, you click the check box to consent for the entire organization... woops!  You did not mean to give everyone permissions for "AuditLog.Read.All" so now you need to revoke this permission.  The easiest way to revoke consent is to just delete the service principal, however, if there are custom settings or individual consents already applied, then you will lose those as well when the service principal is deleted.  What is the solution?  Use the Microsoft Graph PowerShell SDK to remove that consented permission from the service principal.  This blog post will show you how to revoke permissions using the Microsoft Graph PowerShell SDK.  I will use the MS Graph Explorer tool's service principal as an example however, this technique can be used to revoke permissions for any resource on a Service Principal.</p>
 <!-- /wp:paragraph -->
